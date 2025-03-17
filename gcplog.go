@@ -26,12 +26,16 @@ func ReplaceAttr(_ []string, a slog.Attr) slog.Attr {
 }
 
 func Setup() {
+	level := slog.LevelInfo
+	if os.Getenv("DEBUG") != "" {
+		level = slog.LevelDebug
+	}
+
 	logger := slog.New(
-		slog.NewJSONHandler(os.Stderr, &slog.HandlerOptions{ReplaceAttr: ReplaceAttr}),
+		slog.NewJSONHandler(os.Stderr, &slog.HandlerOptions{
+			ReplaceAttr: ReplaceAttr,
+			Level:       level,
+		}),
 	)
 	slog.SetDefault(logger)
-
-	if os.Getenv("DEBUG") != "" {
-		slog.SetLogLoggerLevel(slog.LevelDebug)
-	}
 }
