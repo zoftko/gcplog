@@ -30,4 +30,8 @@ func Setup() {
 		slog.NewJSONHandler(os.Stderr, &slog.HandlerOptions{ReplaceAttr: ReplaceAttr}),
 	)
 	slog.SetDefault(logger)
+
+	if os.Getenv("DEBUG") != "" {
+		slog.SetLogLoggerLevel(slog.LevelDebug)
+	}
 }

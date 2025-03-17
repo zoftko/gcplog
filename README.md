@@ -4,7 +4,8 @@ GCP will fail to extract the severity and structured values out of the log. This
 so that GCP can parse log messages correctly.
 
 ## Usage
-Simply call `gcplog.Setup()`. Please note this will change the logger in `slog` for a new one.
+Simply call `gcplog.Setup()`. Please note this will change the logger in `slog` for a new one. It will also
+enable debug logs if the environment variable `DEBUG` is set.
 
 ```go
 package main
